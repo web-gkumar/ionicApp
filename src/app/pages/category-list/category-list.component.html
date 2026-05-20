@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ category | titlecase }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="bannerimg"><img src="../../../assets/banner/banner.jpg" width="100%" height="100px"></div>
+
+  <div class="section-header">
+    <h3 style="padding:0;margin:0;">Recommended {{ category | titlecase }}</h3>
+    <p>Choose your goods from here</p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      @for (c of allItems; track c) {
+        <ion-col size="6">
+          <ion-card class="card" (click)="detailspage(c)">
+            <ion-img [src]="c.image"></ion-img>
+            <ion-badge color="danger" class="follow">Follow</ion-badge>
+            <ion-card-content>
+              <h3>{{ c.name | titlecase}}</h3>
+              <p>₹{{c.price}}/kg</p>
+              <p>Qty: {{c.quantity}}</p>
+              <p><small>{{ c.location }} Bihar</small></p>
+              <p><small>1 Day</small></p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/tabs/profile"></ion-back-button></ion-buttons>
+    <ion-title>{{urlId ? 'Update Post': 'Add Post'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="orderForm">
+    <ion-item>
+      <ion-select placeholder="For Buy/Sell" formControlName="purpose">
+        <ion-select-option value="buy">For Buy</ion-select-option>
+        <ion-select-option value="sell">For Sell</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item><ion-input color="primary" placeholder="Gobhi/Tamater/Aalu" formControlName="cropName"></ion-input></ion-item>
+    <ion-item><ion-input color="primary" placeholder="120/kg" formControlName="price"></ion-input></ion-item>
+    <ion-item><ion-input color="primary" placeholder="20/quntal" formControlName="quantity"></ion-input></ion-item>
+    <ion-datetime presentation="date" display-format="DD/MM/YYYY" formControlName="deliveryDate"></ion-datetime>
+
+    <!-- <ion-item>
+      <ion-label>File Upload</ion-label>
+      <input type="file" hidden #fileInput multiple accept="image/*,video/*" (change)="onFilesSelected($event)" />
+      <ion-button expand="block" fill="outline" (click)="fileInput.click()">Select Files</ion-button>
+    </ion-item>
+
+    <swiper-container slides-per-view="1" pagination="true" loop="true">
+      <swiper-slide *ngFor="let file of files; let i = index">
+        <ion-button size="small" color="danger" fill="clear" (click)="removeSlideimage(i)">Remove</ion-button>
+        <img *ngIf="file.type === 'image'" [src]="file.url" />
+        <video *ngIf="file.type === 'video'" [src]="file.url" controls></video>
+      </swiper-slide>
+    </swiper-container> -->
+
+    <ion-button expand="block" color="secondary" (click)="urlId ? updateOrder() : submitOrder()" [disabled]="orderForm.invalid">{{urlId ? 'Update' : 'Add'}} Order</ion-button>
+  </form>
+</ion-content>

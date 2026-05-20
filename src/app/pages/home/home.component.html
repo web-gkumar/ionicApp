@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+
+
+<ion-content>
+  <!-- <swiper-container slides-per-view="1" pagination="true" autoplay-delay="5000" loop="true">
+    <swiper-slide><img src="assets/banner/banner.jpg" /></swiper-slide>
+    <swiper-slide><img src="assets/banner/banner2.jpg" /></swiper-slide>
+    <swiper-slide><img src="assets/banner/banner3.jpg" /></swiper-slide>
+  </swiper-container>
+
+  <swiper-container slides-per-view="4" autoplay-delay="3000" loop="true">
+    @for (cat of categories; track cat) {
+      <swiper-slide>
+        <div class="cat-card" (click)="openCategory(cat.category)">
+          <img [src]="cat.image" />
+          <small>{{ cat.category }}</small>
+        </div>
+      </swiper-slide>
+    }
+  </swiper-container> -->
+
+
+
+
+
+
+  <div class="section-header">
+    <h2>Recommended</h2>
+    <p>Choose your goods from here</p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      @for (c of crops; track c) {
+        <ion-col size="6">
+          <ion-card class="card" (click)="detailspage(c)">
+            <ion-img [src]="c.image"></ion-img>
+            <ion-badge color="danger" class="follow">Follow</ion-badge>
+            <ion-card-content>
+              <h3>{{ c.name | titlecase}}</h3>
+              <p>₹{{c.price}}/kg</p>
+              <p>Qty: {{c.quantity}}</p>
+              <p><small>{{ c.location }} Bihar</small></p>
+              <p><small>1 Day</small></p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

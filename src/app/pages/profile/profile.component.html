@@ -1,0 +1,118 @@
+<ion-content>
+  <ion-card color="secondary">
+    <ion-item lines="none">
+      <ion-avatar slot="start"><ion-img [src]="user?.picture || 'assets/avatar.png'"
+      (ionError)="onImgError($event)"></ion-img></ion-avatar>
+      <ion-label style="color:#fff;">
+        <h2>{{user?.name}}</h2>
+        <p style="color:#fff;">{{user?.mobile ? user?.mobile : '+91 xxx xxxx'}}</p>
+        <small>{{user?.email}}</small>
+      </ion-label>
+    </ion-item>
+
+    <ion-segment [(ngModel)]="activeTab">
+      <ion-segment-button value="orders">Orders</ion-segment-button>
+      <ion-segment-button value="favorite">Favorite</ion-segment-button>
+      <ion-segment-button value="about">About</ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+
+  @if (activeTab === 'orders') {
+    <div>
+      <ion-item slot="header" color="secondary" routerLink="../create-post"><ion-icon name="add-circle-outline"></ion-icon> <ion-label>Add Items</ion-label></ion-item>
+      <!-- <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let c of crops">
+          <ion-card class="card">
+            <ion-card-content>
+              <ion-item lines="none"><ion-label><h2>{{ c.cropName | titlecase}} - <small>₹{{c.price}}</small></h2></ion-label></ion-item>
+              <ion-item lines="none">
+                <ion-label><small>Qty: {{c.quantity}}</small></ion-label>
+                <ion-label><small>Deliver: {{ c.deliveryDate | date:'dd/MMM/yyyy' }}</small></ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>Perpose: For Buying</ion-label>
+                <ion-badge slot="end" color="success" (click)="updateitem(c)"><ion-icon name="pencil-outline"></ion-icon></ion-badge>
+                <ion-badge slot="end" color="danger" (click)="removeItem(c)"><ion-icon name="close-circle-outline"></ion-icon></ion-badge>
+              </ion-item>
+            </ion-card-content>
+            <swiper-container slides-per-view="1" pagination="true">
+              <swiper-slide *ngFor="let f of c.files">
+                <img *ngIf="f.type === 'image'" [src]="apiUrl + f.url" width="100%"/>
+                <video *ngIf="f.type === 'video'" [src]="apiUrl + f.url" controls>
+                </video>
+              </swiper-slide>
+            </swiper-container>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+    @for (c of crops; track c) {
+      <ion-card class="card">
+        <ion-card-content>
+          <ion-item lines="none"><ion-label><h2>{{ c.cropName | titlecase}} - <small>₹{{c.price}}</small></h2></ion-label></ion-item>
+          <ion-item lines="none">
+            <ion-label><small>Qty: {{c.quantity}}</small></ion-label>
+            <ion-label><small>Deliver: {{ c.deliveryDate | date:'dd/MMM/yyyy' }}</small></ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Perpose: For {{c.purpose}}</ion-label>
+            <ion-badge slot="end" color="success" (click)="updateitem(c)"><ion-icon name="pencil-outline"></ion-icon></ion-badge>
+            <ion-badge slot="end" color="danger" (click)="removeItem(c)"><ion-icon name="close-circle-outline"></ion-icon></ion-badge>
+          </ion-item>
+        </ion-card-content>
+        <swiper-container slides-per-view="1" pagination="true">
+          @for (f of c.files; track f) {
+            <swiper-slide>
+              @if (f.type === 'image') {
+                <img [src]="apiUrl + f.url" width="100%"/>
+              }
+              @if (f.type === 'video') {
+                <video [src]="apiUrl + f.url" controls>
+                </video>
+              }
+            </swiper-slide>
+          }
+        </swiper-container>
+      </ion-card>
+    }
+  </div>
+}
+
+
+
+@if (activeTab === 'favorite') {
+  <ion-list class="favtab">
+    @for (c of crops; track c) {
+      <ion-card>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start"><img src="https://i.pravatar.cc/150" /></ion-thumbnail>
+          <ion-label>
+            <h5>Gkumar</h5><small style="opacity: 0.5;">Patna</small>
+          </ion-label>
+          <ion-badge slot="end" color="success">Follower</ion-badge>
+        </ion-item>
+      </ion-card>
+    }
+  </ion-list>
+}
+
+
+@if (activeTab === 'about') {
+  <ion-list>
+    <form [formGroup]="profileForm">
+      <ion-item><ion-label><h5>Personal Information</h5></ion-label></ion-item>
+      <ion-item><ion-input type="tel" placeholder="+91 xxxxxxxxxx *" formControlName="mobile"></ion-input></ion-item>
+      <ion-item><ion-input placeholder="Village *" formControlName="village"></ion-input></ion-item>
+      <ion-item><ion-input placeholder="Distic *" formControlName="distic"></ion-input></ion-item>
+      <ion-item><ion-input placeholder="State *" formControlName="state"></ion-input></ion-item>
+      <ion-item><ion-input placeholder="Pin Code *" formControlName="pincode"></ion-input></ion-item>
+      <ion-item><ion-input placeholder="Country *" formControlName="country"></ion-input></ion-item>
+      <ion-item><ion-input placeholder="Your Address *" formControlName="fulladdress"></ion-input></ion-item>
+      <ion-button color="secondary" expand="block" (click)="submitProfile()">Update Profile</ion-button>
+    </form>
+  </ion-list>
+}
+
+</ion-content>

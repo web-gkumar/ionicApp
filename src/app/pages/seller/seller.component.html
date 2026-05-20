@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+
+<ion-content>
+  <div class="bannerimg"><img src="../../../assets/banner/banner.jpg" width="100%" height="100px"></div>
+
+  <div class="section-header">
+    <h2>Recommended</h2>
+    <p>Choose your goods from here</p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      @for (c of crops; track c) {
+        <ion-col size="6">
+          <ion-card class="card" (click)="detailspage(c)">
+            <ion-img [src]="c.image"></ion-img>
+            <ion-badge color="danger" class="follow">Follow</ion-badge>
+            <ion-card-content>
+              <h3>{{ c.name | titlecase}}</h3>
+              <p>₹{{c.price}}/kg</p>
+              <p>Qty: {{c.quantity}}</p>
+              <p><small>{{ c.location }} Bihar</small></p>
+              <p><small>1 Day</small></p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

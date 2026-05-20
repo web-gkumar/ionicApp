@@ -1,0 +1,14 @@
+ion-item {position:relative;
+    h2 {margin:0;}
+    ion-button {--box-shadow:none;width:40px;height:40px;font-size:30px;margin-right:10px;}
+    .follow {padding:5px;}
+}
+
+.card {border-radius:14px;margin:10px;position:relative;
+    ion-img {object-fit:cover; height:auto;}
+    h3 {font-size:16px;margin:0;}
+    .location {font-size:12px;}
+    .price-row {display:flex;align-items:center;gap:6px;font-size:13px;}
+
+    ion-card-content {padding:10px 0 0}
+}

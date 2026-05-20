@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"><ion-back-button defaultHref="tabs/home"></ion-back-button></ion-buttons>
+    <ion-searchbar placeholder="Search products"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item lines="none">
+    <ion-label><strong>Search History</strong></ion-label>
+    <ion-button fill="clear" size="small">Clear</ion-button>
+  </ion-item>
+  @for (item of recentSearch; track item) {
+    <ion-chip>
+      <ion-label>{{ item }}</ion-label>
+    </ion-chip>
+  }
+
+
+  <ion-item lines="none" class="ion-margin-top">
+    <ion-label><strong>Most Viewer</strong></ion-label>
+    <ion-button fill="clear" size="small">Refresh</ion-button>
+  </ion-item>
+  @for (item of recentSearch; track item) {
+    <ion-chip>
+      <ion-label>{{ item }}</ion-label>
+    </ion-chip>
+  }
+
+</ion-content>

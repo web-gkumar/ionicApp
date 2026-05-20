@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://new-backend-w7jv.onrender.com/api'
 };

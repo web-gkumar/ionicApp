@@ -1,0 +1,21 @@
+<app-header></app-header>
+
+<ion-content>
+  <div class="bannerimg"><img src="../../../assets/banner/banner.jpg" width="100%" height="100px"></div>
+  <div class="section-header">
+    <h2>Recommended</h2>
+    <p>Choose your goods from here</p>
+  </div>
+  <ion-grid>
+    <ion-row>
+      @for (cat of categories; track cat) {
+        <ion-col size="4">
+          <div class="cat-card" (click)="openCategory(cat.category)">
+            <img [src]="cat.image" />
+            <small>{{ cat.category }}</small>
+          </div>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>
