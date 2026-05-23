@@ -1,34 +1,32 @@
-<ion-content class="auth-bg">
+<ion-content>
   <div class="auth-card">
     <h2>Create Account</h2>
     <p>Join our farming community 🌱</p>
-    <form [formGroup]="registerForm">
-      <ion-list>
-        <ion-item>
-          <ion-input labelPlacement="floating" formControlName="username" placeholder="Username"><div slot="label">Username <ion-text color="danger">*</ion-text></div></ion-input>
-        </ion-item>
-        <!-- <ion-text color="danger" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid"><small>Username is required</small></ion-text> -->
-        <ion-item>
-          <ion-input labelPlacement="floating" type="email" formControlName="email" placeholder="Email"><div slot="label">Email</div></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input labelPlacement="floating" type="tel" maxlength="10" formControlName="mobile" placeholder="Mobile"><div slot="label">Mobile <ion-text color="danger">*</ion-text></div></ion-input>
-        </ion-item>
-        <!-- <ion-text color="danger" *ngIf="registerForm.get('mobile')?.touched && registerForm.get('mobile')?.invalid"><small>Enter valid 10 digit mobile number</small></ion-text> -->
-        @if (otpSent) {
-          <ion-item>
-            <ion-input labelPlacement="floating" type="number" formControlName="otp" placeholder="Enter OTP"><div slot="label">OTP <ion-text color="danger">*</ion-text></div></ion-input>
-          </ion-item>
-        }
-        <!-- <ion-text color="danger" *ngIf="otpSent && registerForm.get('otp')?.touched && registerForm.get('otp')?.invalid"><small>Invalid OTP</small></ion-text> -->
-      </ion-list>
-      @if (!otpSent) {
-        <ion-button expand="block" [disabled]="registerForm.invalid" (click)="sendOtp()">Send OTP</ion-button>
-      }
-      @if (otpSent) {
-        <ion-button expand="block" color="success" [disabled]="registerForm.get('otp')?.invalid" (click)="verifyOtp()">Verify & Register</ion-button>
-      }
-    </form>
-    <p class="link">Already have an account? <span routerLink="/login">Login</span></p>
   </div>
+  <form [formGroup]="signupForm">
+    <ion-list>
+      <ion-item>
+        <ion-input labelPlacement="floating" formControlName="name" placeholder="Name">
+          <div slot="label">Name <ion-text color="danger">*</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input labelPlacement="floating" type="email" formControlName="email" placeholder="Email">
+          <div slot="label">Email</div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input labelPlacement="floating" type="tel" maxlength="10" formControlName="mobile" placeholder="Mobile">
+          <div slot="label">Mobile <ion-text color="danger">*</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input labelPlacement="floating" type="password" formControlName="password" placeholder="Password">
+          <div slot="label">Password <ion-text color="danger">*</ion-text></div>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+  <div style="margin:15px;"><ion-button fill="outline" expand="block" (click)="onSubmit()">Register</ion-button></div>
+  <p style="text-align:center;">Already have an account? <a routerLink="/tabs/login">Login</a></p>
 </ion-content>

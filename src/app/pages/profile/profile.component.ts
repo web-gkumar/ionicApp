@@ -41,10 +41,10 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
       mobile: [this.user?.mobile || '', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       village: [this.user?.village || '', Validators.required],
-      distic: [this.user?.distic || '', Validators.required],
+      district: [this.user?.district || '', Validators.required],
       state: [this.user?.state || '', Validators.required],
       pincode: [this.user?.pincode || '', Validators.required],
-      fulladdress: [this.user?.fulladdress || '', Validators.required],
+      address: [this.user?.address || '', Validators.required],
       country: [this.user?.country || '', Validators.required]
     });
     this.loadOrders();
@@ -58,9 +58,6 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.invalid) return;
     this._auth.updateProfile(this.profileForm.value).subscribe((res: any) => {
       this.user = res.user;
-      // localStorage.setItem('profile', JSON.stringify(res.user));
-      // alert('Profile updated successfully');
-      // this.user = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile') || '{}') : {};
     });
   }
 
@@ -68,9 +65,8 @@ export class ProfileComponent implements OnInit {
 
   loadOrders() {
     if (this.user._id) {
-      this._crudService.getOrders(this.user._id).subscribe((res: any) => {
+      this._crudService.getOrders().subscribe((res: any) => {
         if (res.success) {
-          localStorage.setItem("Posted-data", JSON.stringify(res.data))
           this.crops = res.data;
         }
       });

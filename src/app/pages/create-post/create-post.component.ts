@@ -2,13 +2,12 @@ import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { Crud } from '../../shared/services/crud';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addCircleOutline, cameraOutline, caretForwardCircle, closeCircleOutline, pencilOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-// import { register } from 'swiper/element/bundle';
 
-// register();
+
 @Component({
   selector: 'app-create-post',
   imports: [IonicModule, FormsModule, ReactiveFormsModule],
@@ -22,7 +21,7 @@ export class CreatePostComponent implements OnInit {
   user: any = {};
   urlId: any;
 
-  constructor(private fb: FormBuilder, private _crudService: Crud, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private _crudService: Crud, private route: ActivatedRoute, private router: Router,) {
     addIcons({ pencilOutline, closeCircleOutline, cameraOutline, caretForwardCircle, addCircleOutline });
   }
 
@@ -86,6 +85,7 @@ export class CreatePostComponent implements OnInit {
     this._crudService.updateOrder(this.urlId, this.orderForm.value).subscribe({
       next: () => {
         alert('Order Updated');
+        this.router.navigate(['../../profile'], { relativeTo: this.route });
         this.orderForm.reset();
         this.files = [];
       }

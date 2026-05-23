@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IonicModule } from '@ionic/angular';
 
 import { RouterModule } from '@angular/router';
+import { Auth } from 'src/app/shared/services/auth';
 
 @Component({
   selector: 'app-registation',
@@ -12,35 +13,30 @@ import { RouterModule } from '@angular/router';
 })
 export class RegistationComponent implements OnInit {
 
-  registerForm!: FormGroup;
-  otpSent = false;
+  signupForm: FormGroup;
+  hidePassword = true;
+  hideConfirmPassword = true;
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
-    this.registerForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', Validators.email],
-      mobile: ['', [
-        Validators.required,
-        Validators.pattern('^[6-9][0-9]{9}$')
-      ]],
-      otp: ['', Validators.required]
+  constructor(private fb: FormBuilder, private auth: Auth) {
+    this.signupForm = this.fb.group({
+      name: ['', [Validators.required]],
+      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  get f() {
-    return this.registerForm.controls;
-  }
+  ngOnInit() { }
 
-  sendOtp() {
-    if (this.registerForm.invalid) return;
-    this.otpSent = true;
-  }
+  onSubmit() {
+    if (this.signupForm.invalid) { this.signupForm.markAllAsTouched();
+      return;
+    }
+    this.auth.signup(this.signupForm.value).subscribe(res => {
+      alert('Registration successful! Please login.');
+      this.signupForm.reset();
+    });
 
-  verifyOtp() {
-    if (this.registerForm.invalid) return;
-    console.log('Register Data:', this.registerForm.value);
   }
 
 }
